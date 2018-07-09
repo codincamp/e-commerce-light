@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mon super e-commerce</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <h2>Catalogue</h2>
+                <div id="catalog" class="row">
+                    
+                </div>
+            </div>
+            <div class="col-2 border-left">
+                <h2>Panier</h2>
+                <ul id="cart"></ul>
+            </div>
+        </div>
+    </main>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./catalog_x10.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var cart = {}
+
+            for(var i=0;i<catalog.length;i++){
+                var product = catalog[i]
+                $("#catalog").append(`
+                    <div class="col-3 mb-5">
+                        <h3>${product.name}</h3>
+                        <h4>${product.price}€</h4>
+                        <button class="add2Cart" type="button" value="${i}">Ajouter</button>
+                    </div>
+                `)
+            }
+
+            function saveCart(){
+                var cart_json = JSON.stringify(cart);
+                sessionStorage.setItem("cart", cart_json);
+            }
+
+            function loadCart(){
+                var cart_json = sessionStorage.getItem("cart");
+                cart  = JSON.parse(cart_json);
+            }
+
+            function displayCart(){
+                $("#cart").html("")
+                for(productId in cart){
+                    $("#cart").append($(`<li>${catalog[productId].name} x ${cart[productId]}</li>`))
+                }
+            }
+
+            loadCart()
+            displayCart()
+
+            $(".add2Cart").click(function(){
+                var productId = $(this).val()
+                if(cart[productId]){
+                    cart[productId]++
+                } else {
+                    cart[productId] = 1
+                }
+                saveCart()
+                displayCart()
+            })
+        })
+    </script>
+</body>
+</html>

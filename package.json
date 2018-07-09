@@ -1,0 +1,24 @@
+{
+  "name": "e-commerce-light",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codincamp/e-commerce-light.git"
+  },
+  "author": "Alban Tiberghien",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/codincamp/e-commerce-light/issues"
+  },
+  "homepage": "https://github.com/codincamp/e-commerce-light#readme"
+}
