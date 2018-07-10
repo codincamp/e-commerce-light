@@ -28,41 +28,25 @@
         </div>
     </main>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./catalog_x10.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./catalog_x10.js"></script>
+    <script src="./utils.js"></script>
     <script>
         $(document).ready(function(){
-            var cart = {}
+            
+            loadCart()
 
             for(var i=0;i<catalog.length;i++){
                 var product = catalog[i]
                 $("#catalog").append(`
-                    <div class="col-3 mb-5">
-                        <h3>${product.name}</h3>
-                        <h4>${product.price}€</h4>
-                        <button class="add2Cart" type="button" value="${i}">Ajouter</button>
-                    </div>
+                <div class="col-3 mb-5">
+                    <h3>${product.name}</h3>
+                    <h4>${product.price}€</h4>
+                    <button class="add2Cart" type="button" value="${i}">Ajouter</button>
+                </div>
                 `)
             }
-
-            function saveCart(){
-                var cart_json = JSON.stringify(cart);
-                sessionStorage.setItem("cart", cart_json);
-            }
-
-            function loadCart(){
-                var cart_json = sessionStorage.getItem("cart");
-                cart  = JSON.parse(cart_json);
-            }
-
-            function displayCart(){
-                $("#cart").html("")
-                for(productId in cart){
-                    $("#cart").append($(`<li>${catalog[productId].name} x ${cart[productId]}</li>`))
-                }
-            }
-
-            loadCart()
+            
             displayCart()
 
             $(".add2Cart").click(function(){
